@@ -1,0 +1,18 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="layout :: htmlhead" th:with="title='Open Interest'"></head>
+
+<body>
+    <div th:replace="layout :: navbar">(navbar)</div>
+
+    <div class="container">
+        <div class="starter-template">
+            <h1>
+                <span th:text="${openinterest}"></span> ETH
+            </h1>
+        </div>
+    </div>
+
+    <div th:include="layout :: footer" id="footer">(footer)</div>
+
+</body>
+</html>

@@ -20,7 +20,8 @@ public class OpenInterestController {
      */
     @GetMapping("/")
     public String getOpenInterestPage(Model model) {
-        model.addAttribute("openinterest", service.getOpenInterest());
+        float openinterest = service.getOpenInterest();
+        model.addAttribute("openinterest", openinterest);
         return "home";
     }
 

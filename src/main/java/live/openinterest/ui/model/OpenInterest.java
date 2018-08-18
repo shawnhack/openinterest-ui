@@ -17,13 +17,6 @@ public class OpenInterest {
     /**
      * 
      */
-    public OpenInterest() {
-        super();
-    }
-
-    /**
-     * 
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "openinterest_id_seq")
     @SequenceGenerator(name = "openinterest_id_seq", sequenceName = "openinterest_id_seq", allocationSize = 1)

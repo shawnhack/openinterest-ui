@@ -21,7 +21,7 @@ public class OpenInterestController {
     @GetMapping("/")
     public String getOpenInterestPage(Model model) {
         model.addAttribute("openinterest", service.getOpenInterest());
-        return "openinterest";
+        return "home";
     }
 
     /**

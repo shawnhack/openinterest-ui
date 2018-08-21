@@ -1,6 +1,6 @@
 package live.openinterest.ui.model;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Ignore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
@@ -20,7 +20,7 @@ class CandlestickServiceTest extends AbstractTest {
 	 * @throws JsonProcessingException
 	 * 
 	 */
-	@Test
+	@Ignore
 	void testGetCandleStickData() throws JsonProcessingException {
 		System.out.println(service.getCandleStickData());
 	}

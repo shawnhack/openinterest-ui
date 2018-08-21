@@ -1,19 +1,46 @@
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head th:include="layout :: htmlhead" th:with="title='Open Interest'"></head>
 
+<script>
+$(function () {
+	$.getJSON('chartdata', function (data) {
+	    Highcharts.stockChart('chart', {
+	        title: {
+	            text: 'Open Interest Chart'
+	        },
+	        series: [{
+	            type: 'candlestick',
+	            name: 'Open Interest',
+	            data: data
+	        }]
+	    });
+	});
+});
+
+</script>
+
 <body>
-    <div th:replace="layout :: navbar">(navbar)</div>
+
+    <div th:replace="layout :: navbar">(navbar)</div> 
 
 
-    <div class="container d-flex h-100 align-items-center">
+    <div class="container d-flex  align-items-center">
         <div class="mx-auto text-center">
             <h1 class="mx-auto my-0 text-uppercase">
                 <span th:text="${openinterest}"></span> ETH
-            </h1>
+            </h1> 
+        </div>
+    </div>
+	<br />
+    <div class="container d-flex align-items-center">
+        <div class="mx-auto text-center">
+       <div id="chart" style="height: 500px; width: 1000px"></div>
         </div>
     </div>
 
-    <div th:include="layout :: footer" id="footer">(footer)</div>
+
+<!--     <div th:include="layout :: footer" id="footer">(footer)</div> -->
 
 </body>
 </html>

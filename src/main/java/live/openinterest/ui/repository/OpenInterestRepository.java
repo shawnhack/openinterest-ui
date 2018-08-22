@@ -8,5 +8,8 @@ import live.openinterest.ui.model.OpenInterest;
 @Repository
 public interface OpenInterestRepository extends JpaRepository<OpenInterest, Integer> {
 
+    /**
+     * @return
+     */
     public OpenInterest findFirstByOrderByIdDesc();
 }

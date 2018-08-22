@@ -19,6 +19,9 @@ public class Candlestick {
 	 * @param amount
 	 */
 	public void update(float amount) {
+		if (open == 0) {
+			open = amount;
+		}
 		if (low == 0) {
 			low = amount;
 		}
@@ -28,6 +31,7 @@ public class Candlestick {
 		if (amount < low) {
 			low = amount;
 		}
+		close = amount;
 	}
 
 	/**

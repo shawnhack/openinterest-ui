@@ -1,7 +1,6 @@
 package live.openinterest.ui.service;
 
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +17,7 @@ import live.openinterest.ui.repository.OpenInterestRepository;
 @Service
 public class CandlestickService {
 
+	private static final int MILLISECONDS_IN_DAY = 86_400_000;
 	@Autowired
 	private OpenInterestRepository repository;
 
@@ -53,7 +53,7 @@ public class CandlestickService {
 			List<Number> day = new ArrayList<>();
 			chartData.add(day);
 
-			day.add(candlestick.getDate().toEpochSecond(ZoneOffset.UTC) * 1000);
+			day.add(candlestick.getDate().toLocalDate().toEpochDay() * MILLISECONDS_IN_DAY);
 			day.add(candlestick.getOpen());
 			day.add(candlestick.getHigh());
 			day.add(candlestick.getLow());
@@ -85,24 +85,61 @@ public class CandlestickService {
 			LocalDateTime candleDate = timestamp;
 
 			if (!currentCandleStick.isSameDay(candleDate)) {
-
-				// Previous candlestick
-				if (currentCandleStick.getOpen() > 0) {
-					candlesticks.add(currentCandleStick);
-					currentCandleStick = new Candlestick();
-				}
-
-				currentCandleStick.setDate(candleDate);
-				currentCandleStick.setOpen(amount);
-
-			} else {
-				currentCandleStick.setClose(amount);
+				currentCandleStick = handleNewCandle(candlesticks, currentCandleStick, candleDate);
 			}
 
 			currentCandleStick.update(amount);
 		}
 
+		candlesticks.add(currentCandleStick);
+
 		return candlesticks;
+	}
+
+	/**
+	 * @param candlesticks
+	 * @param currentCandleStick
+	 * @param candleDate
+	 * @return
+	 */
+	private Candlestick handleNewCandle(List<Candlestick> candlesticks, Candlestick currentCandleStick,
+			LocalDateTime candleDate) {
+
+		float close = 0;
+
+		// Previous completed candlestick
+		if (currentCandleStick.getDate() != null) {
+			close = handlePreviousCandle(candlesticks, currentCandleStick);
+		}
+
+		currentCandleStick = getNextCandle(close, currentCandleStick, candleDate);
+
+		return currentCandleStick;
+	}
+
+	/**
+	 * @param candlesticks
+	 * @param currentCandleStick
+	 * @return
+	 */
+	private Candlestick getNextCandle(float open, Candlestick currentCandleStick, LocalDateTime candleDate) {
+
+		Candlestick nextCandleStick = new Candlestick();
+		nextCandleStick.update(open);
+		nextCandleStick.setDate(candleDate);
+
+		return nextCandleStick;
+	}
+
+	/**
+	 * @param candlesticks
+	 * @param currentCandleStick
+	 * @return
+	 */
+	private float handlePreviousCandle(List<Candlestick> candlesticks, Candlestick currentCandleStick) {
+		float close = currentCandleStick.getClose();
+		candlesticks.add(currentCandleStick);
+		return close;
 	}
 
 }

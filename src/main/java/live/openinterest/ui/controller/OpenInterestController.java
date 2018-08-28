@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import live.openinterest.ui.service.CandlestickService;
+import live.openinterest.ui.service.DailyCandleService;
 import live.openinterest.ui.service.OpenInterestService;
 
 @Controller
@@ -16,7 +16,7 @@ public class OpenInterestController {
 	private OpenInterestService service;
 
 	@Autowired
-	private CandlestickService candleStickService;
+	private DailyCandleService candleStickService;
 
 	/**
 	 * @param model

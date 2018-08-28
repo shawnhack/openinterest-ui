@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import live.openinterest.ui.repository.OpenInterestRepository;
-import live.openinterest.ui.service.CandlestickService;
+import live.openinterest.ui.service.DailyCandleService;
 import live.openinterest.ui.test.AbstractTest;
 
 public class CandlestickServiceTest extends AbstractTest {
 
 	@Autowired
-	private CandlestickService service;
+	private DailyCandleService service;
 
 	@Mock
 	private OpenInterestRepository repository;

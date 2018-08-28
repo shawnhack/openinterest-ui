@@ -8,17 +8,18 @@ import org.springframework.web.servlet.resource.WebJarsResourceResolver;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#
-     * addResourceHandlers(org.springframework.web.servlet.config.annotation.
-     * ResourceHandlerRegistry)
-     */
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#
+	 * addResourceHandlers(org.springframework.web.servlet.config.annotation.
+	 * ResourceHandlerRegistry)
+	 */
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 
-        registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/").resourceChain(true)
-                .addResolver(new WebJarsResourceResolver());
-    }
+		registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/").resourceChain(true)
+				.addResolver(new WebJarsResourceResolver());
+	}
+
 }

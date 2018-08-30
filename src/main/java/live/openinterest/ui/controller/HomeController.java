@@ -29,10 +29,9 @@ public class HomeController {
 	 * @return
 	 */
 	@GetMapping("/")
-	public String getOpenInterestPage(Model model) {
+	public String getHomepage(Model model) {
 		float openinterest = service.getOpenInterest();
 		model.addAttribute("openinterest", openinterest);
 		return "home";
 	}
-
 }

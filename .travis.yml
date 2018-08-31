@@ -7,3 +7,4 @@ matrix:
   include:
     - os: linux
       jdk: openjdk10
+
